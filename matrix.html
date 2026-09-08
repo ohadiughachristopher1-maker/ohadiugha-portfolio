@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MATRIX // ACCESS</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000;color:#00ff41;font-family:monospace}
+canvas{position:fixed;inset:0;z-index:0}
+#scan{position:fixed;inset:0;pointer-events:none;z-index:5;
+background:repeating-linear-gradient(0deg,transparent 0px,transparent 3px,#00ff4110 4px)}
+.box{
+position:relative;z-index:2;width:min(92%,520px);margin:auto;
+top:50%;transform:translateY(-50%);
+border:1px solid #00ff41;background:#000d;
+box-shadow:0 0 35px #00ff4166;
+padding:25px;border-radius:10px;text-align:center
+}
+.logo{font-size:55px;text-shadow:0 0 20px #00ff41}
+h1{font-size:32px;margin:5px 0 15px;text-shadow:0 0 12px #00ff41}
+#terminal{text-align:left;height:190px;overflow:hidden;border:1px solid #073;
+padding:12px;margin:15px 0;background:#000;font-size:13px}
+.line{margin:5px 0}
+button,input{
+font-family:monospace;border:1px solid #00ff41;
+background:#001b08;color:#00ff41;padding:13px;
+font-size:16px;border-radius:5px
+}
+button{cursor:pointer}
+button:hover{background:#00ff4133}
+input{width:180px;text-align:center;text-transform:uppercase}
+#game{display:none}
+#count{font-size:45px;text-shadow:0 0 15px #00ff41}
+#result{display:none}
+.big{font-size:55px}
+.glitch{animation:glitch .12s infinite}
+@keyframes glitch{
+0%{transform:translate(0)}
+25%{transform:translate(3px,-1px)}
+50%{transform:translate(-3px,1px)}
+75%{transform:translate(1px,2px)}
+100%{transform:translate(0)}
+}
+.red{color:#ff2020;text-shadow:0 0 15px red}
+</style>
+</head>
+<body>
+
+<canvas id="matrix"></canvas>
+<div id="scan"></div>
+
+<div class="box">
+
+<div class="logo">⟁</div>
+<h1>MATRIX ACCESS</h1>
+
+<div id="intro">
+<p>SECURE TERMINAL v9.7</p>
+<p>Something is waiting behind the system...</p>
+<button id="enter">ENTER THE MATRIX</button>
+</div>
+
+<div id="game">
+<div id="terminal"></div>
+<div id="count">20</div>
+<p>Find the secret access code.</p>
+<input id="code" maxlength="4" placeholder="????">
+<br><br>
+<button id="submit">ACCESS</button>
+</div>
+
+<div id="result">
+<div class="big">🟢</div>
+<h1 class="glitch">ACCESS GRANTED</h1>
+<p id="message"></p>
+<button onclick="location.reload()">REBOOT SYSTEM</button>
+</div>
+
+</div>
+
+<script>
+const canvas=document.getElementById("matrix");
+const ctx=canvas.getContext("2d");
+
+function resize(){
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+}
+resize();
+addEventListener("resize",resize);
+
+const chars="01ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&@";
+const size=16;
+let columns=Math.floor(innerWidth/size);
+let drops=Array(columns).fill(1);
+
+function rain(){
+ctx.fillStyle="rgba(0,0,0,.08)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="#00ff41";
+ctx.font=size+"px monospace";
+
+for(let i=0;i<drops.length;i++){
+let text=chars[Math.floor(Math.random()*chars.length)];
+ctx.fillText(text,i*size,drops[i]*size);
+if(drops[i]*size>canvas.height && Math.random()>.975) drops[i]=0;
+drops[i]++;
+}
+}
+setInterval(rain,45);
+
+const intro=document.getElementById("intro");
+const game=document.getElementById("game");
+const terminal=document.getElementById("terminal");
+const enter=document.getElementById("enter");
+const count=document.getElementById("count");
+const code=document.getElementById("code");
+const submit=document.getElementById("submit");
+const result=document.getElementById("result");
+const message=document.getElementById("message");
+
+let audio;
+
+function beep(f,d=.08){
+try{
+if(!audio) audio=new AudioContext();
+let o=audio.createOscillator();
+let g=audio.createGain();
+o.frequency.value=f;
+o.type="square";
+g.gain.value=.025;
+o.connect(g);g.connect(audio.destination);
+o.start();o.stop(audio.currentTime+d);
+}catch(e){}
+}
+
+function line(t){
+let d=document.createElement("div");
+d.className="line";
+d.textContent=t;
+terminal.appendChild(d);
+terminal.scrollTop=terminal.scrollHeight;
+}
+
+enter.onclick=()=>{
+intro.style.display="none";
+game.style.display="block";
+
+try{audio=new AudioContext();audio.resume()}catch(e){}
+
+const logs=[
+"> BOOTING MATRIX TERMINAL...",
+"> ENCRYPTED CHANNEL OPEN",
+"> SEARCHING FOR ACCESS NODE...",
+"> FIREWALL: ACTIVE",
+"> UNKNOWN SIGNAL DETECTED",
+"> GENERATING SECURITY KEY...",
+"> WARNING: TIME-LIMITED ACCESS",
+"> ENTER THE 4-DIGIT CODE"
+];
+
+let i=0;
+let timer=setInterval(()=>{
+line(logs[i]);
+beep(200+i*30);
+i++;
+if(i>=logs.length)clearInterval(timer);
+},500);
+
+let n=20;
+let countdown=setInterval(()=>{
+n--;
+count.textContent=n;
+if(n<=5){
+count.className="red glitch";
+beep(600,.05);
+}
+if(n<=0){
+clearInterval(countdown);
+fail();
+}
+},1000);
+};
+
+function fail(){
+game.style.display="none";
+result.style.display="block";
+message.innerHTML=
+"<span class='red'>ACCESS DENIED</span><br><br>"+
+"The Matrix rejected your connection.<br>"+
+"<br>😈 Nice try, Neo.";
+}
+
+submit.onclick=()=>{
+let value=code.value.trim();
+
+if(value==="404"){
+game.style.display="none";
+result.style.display="block";
+message.innerHTML=
+"THE SYSTEM RECOGNIZES YOU.<br><br>"+
+"🔓 Secret code: 404<br><br>"+
+"Welcome to the Matrix, Neo.";
+beep(900,.3);
+}else{
+line("> INVALID CODE: "+value);
+code.value="";
+code.focus();
+beep(90,.2);
+}
+};
+
+code.addEventListener("keydown",e=>{
+if(e.key==="Enter")submit.click();
+});
+</script>
+
+</body>
+</html>
