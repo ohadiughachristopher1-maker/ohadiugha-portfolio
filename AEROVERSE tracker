@@ -1,0 +1,10 @@
+<section id="projects" style="padding: 40px 20px; max-width: 800px; margin: 0 auto;">
+  <h2>My Projects</h2>
+
+  <div style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
+    <h3>Aeroverse Tracker</h3>
+    <p>A Python-based tracking tool for monitoring satellites and flights in real time, pulling live position data and displaying it in an easy-to-read format.</p>
+    <a href="https://github.com/ohadiughachristopher1-maker/ohadiugha-portfolio/blob/main/aeroversetracker.py" target="_blank">View Code on GitHub</a>
+  </div>
+
+</section>
