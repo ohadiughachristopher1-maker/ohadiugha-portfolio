@@ -1,404 +1,799 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Ohadiugha Christopher Chidera | Python Programmer</title>
+<title>Ohadiugha Christopher Chidera | Python Programmer</title>
 
-    <meta name="description"
-          content="Ohadiugha Christopher Chidera — Python programmer and developer. Available for programming projects and collaborations.">
+<meta name="description" content="Ohadiugha Christopher Chidera - Python Programmer, Developer and Technology Project Builder. Explore my projects and work with me.">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        html {
-            scroll-behavior: smooth;
-        }
+html {
+    scroll-behavior: smooth;
+}
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #050816;
-            color: #ffffff;
-            line-height: 1.6;
-        }
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #050814;
+    color: #f5f7ff;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
 
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 18px 7%;
-            background: rgba(5, 8, 22, 0.88);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
+/* =========================
+   BACKGROUND
+========================= */
 
-        .logo {
-            font-size: 20px;
-            font-weight: bold;
-            color: #4ade80;
-        }
+body::before {
+    content: "";
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    background: rgba(0, 255, 150, 0.08);
+    filter: blur(100px);
+    border-radius: 50%;
+    top: 100px;
+    left: -200px;
+    pointer-events: none;
+    z-index: -1;
+}
 
-        .logo span {
-            color: white;
-        }
+body::after {
+    content: "";
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    background: rgba(0, 150, 255, 0.07);
+    filter: blur(100px);
+    border-radius: 50%;
+    bottom: -200px;
+    right: -200px;
+    pointer-events: none;
+    z-index: -1;
+}
 
-        nav a {
-            color: #ddd;
-            text-decoration: none;
-            margin-left: 22px;
-            font-size: 14px;
-            transition: 0.3s;
-        }
+/* =========================
+   NAVIGATION
+========================= */
 
-        nav a:hover {
-            color: #4ade80;
-        }
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background: rgba(5, 8, 20, 0.90);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 7%;
+    z-index: 1000;
+}
 
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 120px 20px 70px;
-            background:
-                radial-gradient(circle at 50% 20%, rgba(74,222,128,0.15), transparent 35%),
-                #050816;
-        }
+.logo {
+    font-size: 22px;
+    font-weight: 900;
+    color: #42e883;
+}
 
-        .hero-content {
-            max-width: 850px;
-        }
+.logo span {
+    color: white;
+}
 
-        .badge {
-            display: inline-block;
-            padding: 8px 16px;
-            margin-bottom: 25px;
-            border: 1px solid rgba(74,222,128,0.35);
-            border-radius: 50px;
-            color: #4ade80;
-            background: rgba(74,222,128,0.08);
-            font-size: 14px;
-        }
+.nav-links {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+}
 
-        .hero h1 {
-            font-size: clamp(40px, 9vw, 80px);
-            line-height: 1.05;
-            margin-bottom: 20px;
-        }
+.nav-links a {
+    color: #cbd2e1;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
 
-        .hero h1 span {
-            color: #4ade80;
-        }
+.nav-links a:hover {
+    color: #42e883;
+}
 
-        .hero h2 {
-            font-size: clamp(20px, 4vw, 30px);
-            color: #cbd5e1;
-            margin-bottom: 20px;
-        }
+.menu-btn {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+}
 
-        .hero p {
-            max-width: 650px;
-            margin: auto;
-            color: #94a3b8;
-            font-size: 17px;
-        }
+/* =========================
+   GENERAL
+========================= */
 
-        .buttons {
-            margin-top: 35px;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
+section {
+    padding: 100px 7%;
+}
 
-        .btn {
-            display: inline-block;
-            padding: 13px 22px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
-        }
+.container {
+    max-width: 1150px;
+    margin: auto;
+}
 
-        .primary {
-            background: #4ade80;
-            color: #03120a;
-        }
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
 
-        .primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(74,222,128,0.2);
-        }
+.section-title h2 {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
 
-        .secondary {
-            border: 1px solid #334155;
-            color: white;
-        }
+.section-title p {
+    color: #8993a8;
+}
 
-        .secondary:hover {
-            border-color: #4ade80;
-            color: #4ade80;
-        }
+.green {
+    color: #42e883;
+}
 
-        section {
-            padding: 90px 7%;
-        }
+/* =========================
+   HERO
+========================= */
 
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 100px;
+}
 
-        .section-title h2 {
-            font-size: 36px;
-            margin-bottom: 10px;
-        }
+.hero-content {
+    max-width: 850px;
+}
 
-        .section-title p {
-            color: #94a3b8;
-        }
+.status {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid rgba(66,232,131,0.35);
+    background: rgba(66,232,131,0.08);
+    border-radius: 50px;
+    color: #42e883;
+    margin-bottom: 25px;
+}
 
-        .about {
-            max-width: 900px;
-            margin: auto;
-            text-align: center;
-        }
+.hero h1 {
+    font-size: clamp(45px, 8vw, 82px);
+    line-height: 1.05;
+    margin-bottom: 20px;
+}
 
-        .about p {
-            color: #cbd5e1;
-            font-size: 17px;
-            margin-bottom: 18px;
-        }
+.hero h1 span {
+    color: #42e883;
+}
 
-        .skills {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            max-width: 1000px;
-            margin: auto;
-        }
+.hero h3 {
+    font-size: 25px;
+    margin-bottom: 25px;
+}
 
-        .skill {
-            padding: 25px;
-            background: #0b1224;
-            border: 1px solid #1e293b;
-            border-radius: 15px;
-            transition: 0.3s;
-        }
+.hero p {
+    color: #aab3c5;
+    max-width: 720px;
+    margin: auto;
+    font-size: 18px;
+}
 
-        .skill:hover {
-            transform: translateY(-5px);
-            border-color: #4ade80;
-        }
+.hero-buttons {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
 
-        .skill-icon {
-            font-size: 35px;
-            margin-bottom: 12px;
-        }
+/* =========================
+   BUTTONS
+========================= */
 
-        .skill h3 {
-            margin-bottom: 8px;
-        }
+.btn {
+    display: inline-block;
+    padding: 15px 25px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.3s;
+}
 
-        .skill p {
-            color: #94a3b8;
-            font-size: 14px;
-        }
+.btn-primary {
+    background: #42e883;
+    color: #031009;
+}
 
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 22px;
-            max-width: 1100px;
-            margin: auto;
-        }
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(66,232,131,0.20);
+}
 
-        .project {
-            padding: 25px;
-            background: linear-gradient(145deg, #0b1224, #07101e);
-            border: 1px solid #1e293b;
-            border-radius: 16px;
-            transition: 0.3s;
-        }
+.btn-secondary {
+    background: transparent;
+    color: white;
+    border: 1px solid #273149;
+}
 
-        .project:hover {
-            transform: translateY(-6px);
-            border-color: #4ade80;
-        }
+.btn-secondary:hover {
+    border-color: #42e883;
+    color: #42e883;
+}
 
-        .project-icon {
-            font-size: 38px;
-            margin-bottom: 15px;
-        }
+/* =========================
+   ABOUT
+========================= */
 
-        .project h3 {
-            margin-bottom: 10px;
-        }
+.about-box {
+    background: rgba(255,255,255,0.035);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 35px;
+    border-radius: 20px;
+}
 
-        .project p {
-            color: #94a3b8;
-            font-size: 14px;
-        }
+.about-box p {
+    color: #aab3c5;
+    margin-bottom: 15px;
+}
 
-        .services {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            max-width: 1000px;
-            margin: auto;
-        }
+/* =========================
+   SKILLS
+========================= */
 
-        .service {
-            padding: 25px;
-            border-radius: 15px;
-            background: #0b1224;
-            border: 1px solid #1e293b;
-        }
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
 
-        .service h3 {
-            color: #4ade80;
-            margin-bottom: 10px;
-        }
+.skill {
+    background: rgba(255,255,255,0.035);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 25px;
+    text-align: center;
+    transition: 0.3s;
+}
 
-        .service p {
-            color: #94a3b8;
-            font-size: 14px;
-        }
+.skill:hover {
+    transform: translateY(-5px);
+    border-color: #42e883;
+}
 
-        .contact-box {
-            max-width: 750px;
-            margin: auto;
-            text-align: center;
-            padding: 45px 25px;
-            background:
-                radial-gradient(
-                    circle at center,
-                    rgba(74,222,128,0.12),
-                    transparent 65%
-                );
-            border: 1px solid #1e293b;
-            border-radius: 20px;
-        }
+.skill-icon {
+    font-size: 35px;
+    margin-bottom: 10px;
+}
 
-        .contact-box h2 {
-            font-size: 34px;
-            margin-bottom: 15px;
-        }
+.skill p {
+    color: #8f99ad;
+    font-size: 14px;
+    margin-top: 7px;
+}
 
-        .contact-box p {
-            color: #94a3b8;
-            margin-bottom: 25px;
-        }
+/* =========================
+   PROJECTS
+========================= */
 
-        footer {
-            padding: 30px 20px;
-            text-align: center;
-            border-top: 1px solid #1e293b;
-            color: #64748b;
-            font-size: 14px;
-        }
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
 
-        footer strong {
-            color: #4ade80;
-        }
+.project {
+    position: relative;
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,0.055),
+        rgba(255,255,255,0.02)
+    );
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 22px;
+    padding: 30px;
+    transition: 0.3s;
+    overflow: hidden;
+}
 
-        @media (max-width: 700px) {
-            nav {
-                padding: 15px 5%;
-            }
+.project:hover {
+    transform: translateY(-7px);
+    border-color: rgba(66,232,131,0.5);
+}
 
-            nav .links {
-                display: none;
-            }
+.project-number {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    color: rgba(255,255,255,0.08);
+    font-size: 50px;
+    font-weight: 900;
+}
 
-            section {
-                padding: 70px 5%;
-            }
+.project-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
 
-            .hero {
-                padding-left: 20px;
-                padding-right: 20px;
-            }
+.project h3 {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
 
-            .hero p {
-                font-size: 15px;
-            }
+.project p {
+    color: #9ba5b8;
+    font-size: 15px;
+    margin-bottom: 20px;
+}
 
-            .section-title h2 {
-                font-size: 30px;
-            }
-        }
-    </style>
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.tag {
+    padding: 5px 10px;
+    background: rgba(66,232,131,0.08);
+    border: 1px solid rgba(66,232,131,0.18);
+    border-radius: 20px;
+    font-size: 12px;
+    color: #42e883;
+}
+
+.project-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.project-buttons .btn {
+    padding: 11px 16px;
+    font-size: 13px;
+}
+
+/* =========================
+   SERVICES
+========================= */
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.service {
+    padding: 30px;
+    background: rgba(255,255,255,0.035);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+}
+
+.service-icon {
+    font-size: 35px;
+    margin-bottom: 15px;
+}
+
+.service h3 {
+    margin-bottom: 10px;
+}
+
+.service p {
+    color: #909bad;
+}
+
+/* =========================
+   PROJECT DEMO MODAL
+========================= */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.82);
+    backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 5000;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-box {
+    width: 100%;
+    max-width: 850px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: #0b1020;
+    border: 1px solid #263149;
+    border-radius: 22px;
+    padding: 30px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.demo-content {
+    margin-top: 25px;
+}
+
+/* =========================
+   FLIGHT RADAR
+========================= */
+
+.radar {
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1;
+    margin: 20px auto;
+    border-radius: 50%;
+    border: 2px solid #42e883;
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle, transparent 20%, rgba(66,232,131,0.04) 21%, transparent 22%),
+        radial-gradient(circle, transparent 40%, rgba(66,232,131,0.04) 41%, transparent 42%),
+        radial-gradient(circle, transparent 60%, rgba(66,232,131,0.04) 61%, transparent 62%),
+        radial-gradient(circle, transparent 80%, rgba(66,232,131,0.04) 81%, transparent 82%),
+        #06120e;
+}
+
+.radar::before,
+.radar::after {
+    content: "";
+    position: absolute;
+    background: rgba(66,232,131,0.25);
+}
+
+.radar::before {
+    width: 100%;
+    height: 1px;
+    top: 50%;
+    left: 0;
+}
+
+.radar::after {
+    width: 1px;
+    height: 100%;
+    left: 50%;
+    top: 0;
+}
+
+.plane {
+    position: absolute;
+    font-size: 22px;
+    animation: radarPulse 1.5s infinite;
+}
+
+@keyframes radarPulse {
+    0%,100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+.flight-list {
+    display: grid;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.flight {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 15px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 10px;
+}
+
+/* =========================
+   SATELLITE DEMO
+========================= */
+
+.satellite-display {
+    text-align: center;
+    padding: 30px;
+    border: 1px solid #263149;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.025);
+}
+
+.satellite-orbit {
+    width: 230px;
+    height: 230px;
+    border: 1px dashed #42e883;
+    border-radius: 50%;
+    margin: 25px auto;
+    position: relative;
+}
+
+.earth {
+    width: 80px;
+    height: 80px;
+    background: #1677ff;
+    border-radius: 50%;
+    position: absolute;
+    top: 75px;
+    left: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+}
+
+.satellite {
+    position: absolute;
+    font-size: 25px;
+    top: -12px;
+    left: 100px;
+    animation: orbit 5s linear infinite;
+    transform-origin: 15px 127px;
+}
+
+@keyframes orbit {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.satellite-data {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.data {
+    padding: 15px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 10px;
+}
+
+.data small {
+    display: block;
+    color: #7f899c;
+}
+
+.data strong {
+    color: #42e883;
+}
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact-box {
+    text-align: center;
+    background: linear-gradient(
+        145deg,
+        rgba(66,232,131,0.08),
+        rgba(255,255,255,0.025)
+    );
+    border: 1px solid rgba(66,232,131,0.18);
+    border-radius: 25px;
+    padding: 60px 25px;
+}
+
+.contact-box h2 {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.contact-box p {
+    color: #9aa4b7;
+    max-width: 650px;
+    margin: 0 auto 25px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 30px 7%;
+    text-align: center;
+    color: #6e788c;
+}
+
+footer strong {
+    color: #42e883;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 850px) {
+
+    .nav-links {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: #080d1b;
+        flex-direction: column;
+        padding: 25px;
+        display: none;
+        border-bottom: 1px solid #20283a;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 550px) {
+
+    section {
+        padding: 80px 5%;
+    }
+
+    .hero {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .hero h1 {
+        font-size: 47px;
+    }
+
+    .hero h3 {
+        font-size: 20px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .skill {
+        padding: 18px 10px;
+    }
+
+    .project {
+        padding: 23px;
+    }
+
+    .project-buttons {
+        flex-direction: column;
+    }
+
+    .project-buttons .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .satellite-data {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-box h2 {
+        font-size: 30px;
+    }
+}
+</style>
 </head>
 
 <body>
+
+<!-- =========================
+     NAVIGATION
+========================= -->
 
 <nav>
     <div class="logo">
         &lt;Ohadiugha<span>/&gt;</span>
     </div>
 
-    <div class="links">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-    </div>
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#home" onclick="closeMenu()">Home</a></li>
+        <li><a href="#about" onclick="closeMenu()">About</a></li>
+        <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+        <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
+        <li><a href="#services" onclick="closeMenu()">Services</a></li>
+        <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+    </ul>
 </nav>
 
+
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero" id="home">
 
     <div class="hero-content">
 
-        <div class="badge">
+        <div class="status">
             🟢 Available for Programming Projects
         </div>
 
         <h1>
-            Ohadiugha Christopher
-            <span>Chidera</span>
+            Ohadiugha Christopher <span>Chidera</span>
         </h1>
 
-        <h2>
+        <h3>
             🐍 Python Programmer & Developer
-        </h2>
+        </h3>
 
         <p>
-            Welcome to my programming profile.
-            I build Python programs, useful tools,
-            automation projects and technology solutions.
-            If you need a programmer for your next idea,
+            Welcome to my programming portfolio.
+            I build Python programs, useful tools, automation projects,
+            web applications and technology solutions.
+            If you have an idea or project you want to build,
             let's work together.
         </p>
 
-        <div class="buttons">
+        <div class="hero-buttons">
 
-            <a
-                class="btn primary"
-                href="https://wa.me/2349069706577?text=Hello%20Christopher%2C%20I%20found%20your%20programming%20profile%20and%20I%20would%20like%20to%20discuss%20a%20project."
-                target="_blank"
-            >
+            <a class="btn btn-primary"
+               href="https://wa.me/2349069706577?text=Hello%20Ohadiugha%2C%20I%20visited%20your%20programming%20portfolio%20and%20I%20would%20like%20to%20work%20with%20you."
+               target="_blank">
                 💬 Contact Me on WhatsApp
             </a>
 
-            <a
-                class="btn secondary"
-                href="#projects"
-            >
-                🚀 View My Projects
+            <a class="btn btn-secondary" href="#projects">
+                🚀 Explore My Projects
             </a>
 
         </div>
@@ -408,136 +803,288 @@
 </section>
 
 
+<!-- =========================
+     ABOUT
+========================= -->
+
 <section id="about">
 
-    <div class="section-title">
-        <h2>👨‍💻 About Me</h2>
-        <p>Programmer • Learner • Builder</p>
-    </div>
+    <div class="container">
 
-    <div class="about">
+        <div class="section-title">
+            <h2>👨‍💻 About Me</h2>
+            <p>Programmer • Builder • Learner</p>
+        </div>
 
-        <p>
-            My name is
-            <strong>Ohadiugha Christopher Chidera</strong>.
-            I am a Python programmer who enjoys learning
-            technology and turning ideas into working programs.
-        </p>
+        <div class="about-box">
 
-        <p>
-            I am interested in software development,
-            automation, space technology, aviation,
-            useful tools and creative programming projects.
-        </p>
+            <p>
+                My name is <strong>Ohadiugha Christopher Chidera</strong>.
+                I am a Python programmer and technology project builder.
+            </p>
 
-        <p>
-            If you have an idea that needs a programmer,
-            feel free to contact me.
-        </p>
+            <p>
+                I enjoy creating software projects that solve problems,
+                experimenting with technology and turning ideas into
+                working applications.
+            </p>
+
+            <p>
+                This website is my personal project hub.
+                Visitors can explore my projects, try available demos,
+                view my code and contact me if they want to collaborate.
+            </p>
+
+        </div>
 
     </div>
 
 </section>
 
+
+<!-- =========================
+     SKILLS
+========================= -->
 
 <section id="skills">
 
-    <div class="section-title">
-        <h2>🛠️ My Skills</h2>
-        <p>Things I am learning and building with</p>
-    </div>
+    <div class="container">
 
-    <div class="skills">
-
-        <div class="skill">
-            <div class="skill-icon">🐍</div>
-            <h3>Python</h3>
-            <p>
-                Building programs, tools,
-                automation and applications with Python.
-            </p>
+        <div class="section-title">
+            <h2>🧠 My Skills</h2>
+            <p>Things I work with and continue learning</p>
         </div>
 
-        <div class="skill">
-            <div class="skill-icon">🌐</div>
-            <h3>Web Development</h3>
-            <p>
-                Creating responsive websites
-                using HTML, CSS and JavaScript.
-            </p>
-        </div>
+        <div class="skills-grid">
 
-        <div class="skill">
-            <div class="skill-icon">🤖</div>
-            <h3>Automation</h3>
-            <p>
-                Creating scripts that automate
-                repetitive tasks and workflows.
-            </p>
-        </div>
+            <div class="skill">
+                <div class="skill-icon">🐍</div>
+                <h3>Python</h3>
+                <p>Programs, automation and tools</p>
+            </div>
 
-        <div class="skill">
-            <div class="skill-icon">🚀</div>
-            <h3>Technology Projects</h3>
-            <p>
-                Building creative projects around
-                aviation, space and technology.
-            </p>
+            <div class="skill">
+                <div class="skill-icon">🌐</div>
+                <h3>Web Development</h3>
+                <p>HTML, CSS and JavaScript</p>
+            </div>
+
+            <div class="skill">
+                <div class="skill-icon">⚙️</div>
+                <h3>Automation</h3>
+                <p>Useful scripts and workflows</p>
+            </div>
+
+            <div class="skill">
+                <div class="skill-icon">🚀</div>
+                <h3>Technology Projects</h3>
+                <p>Creative software experiments</p>
+            </div>
+
         </div>
 
     </div>
 
 </section>
 
+
+<!-- =========================
+     PROJECTS
+========================= -->
 
 <section id="projects">
 
-    <div class="section-title">
-        <h2>🚀 My Projects</h2>
-        <p>Projects I am building and exploring</p>
-    </div>
+    <div class="container">
 
-    <div class="projects">
-
-        <div class="project">
-            <div class="project-icon">✈️</div>
-            <h3>Flight Radar Simulator</h3>
-            <p>
-                A Python aviation project that
-                simulates aircraft tracking,
-                flight numbers, altitude, speed
-                and destinations.
-            </p>
+        <div class="section-title">
+            <h2>🚀 My Projects</h2>
+            <p>Explore my work and try the available demos</p>
         </div>
 
-        <div class="project">
-            <div class="project-icon">🛰️</div>
-            <h3>Satellite Tracker</h3>
-            <p>
-                A Python project designed to
-                retrieve satellite position data
-                and display tracking information.
-            </p>
-        </div>
+        <div class="projects-grid">
 
-        <div class="project">
-            <div class="project-icon">🚀</div>
-            <h3>AEROVERSE</h3>
-            <p>
-                My bigger space and aviation project
-                combining satellites, aircraft,
-                missions and space technology.
-            </p>
-        </div>
 
-        <div class="project">
-            <div class="project-icon">🤖</div>
-            <h3>Python Tools</h3>
-            <p>
-                Small Python programs created
-                to solve useful problems and
-                experiment with programming.
-            </p>
+            <!-- PROJECT 1 -->
+
+            <div class="project">
+
+                <div class="project-number">01</div>
+
+                <div class="project-icon">✈️</div>
+
+                <h3>Flight Radar Simulator</h3>
+
+                <p>
+                    An aviation project that displays simulated aircraft,
+                    flight numbers, altitude, speed and heading.
+                    Visitors can interact with the radar demo.
+                </p>
+
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Aviation</span>
+                    <span class="tag">Radar</span>
+                    <span class="tag">Simulation</span>
+                </div>
+
+                <div class="project-buttons">
+
+                    <button class="btn btn-primary"
+                            onclick="openFlightDemo()">
+                        ▶ Try Live Demo
+                    </button>
+
+                    <a class="btn btn-secondary"
+                       href="https://github.com/ohadiughachristopher1-maker/ohadiugha-portfolio"
+                       target="_blank">
+                        📂 View Code
+                    </a>
+
+                    <a class="btn btn-secondary"
+                       href="https://wa.me/2349069706577?text=Hello%20Ohadiugha%2C%20I%20am%20interested%20in%20your%20Flight%20Radar%20project."
+                       target="_blank">
+                        🤝 Join Project
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- PROJECT 2 -->
+
+            <div class="project">
+
+                <div class="project-number">02</div>
+
+                <div class="project-icon">🛰️</div>
+
+                <h3>Satellite Tracker</h3>
+
+                <p>
+                    A satellite tracking project designed to display
+                    satellite information and orbital data.
+                    Try the interactive browser demonstration.
+                </p>
+
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Space</span>
+                    <span class="tag">Satellite</span>
+                    <span class="tag">API</span>
+                </div>
+
+                <div class="project-buttons">
+
+                    <button class="btn btn-primary"
+                            onclick="openSatelliteDemo()">
+                        ▶ Try Live Demo
+                    </button>
+
+                    <a class="btn btn-secondary"
+                       href="https://github.com/ohadiughachristopher1-maker/ohadiugha-portfolio"
+                       target="_blank">
+                        📂 View Code
+                    </a>
+
+                    <a class="btn btn-secondary"
+                       href="https://wa.me/2349069706577?text=Hello%20Ohadiugha%2C%20I%20am%20interested%20in%20your%20Satellite%20Tracker%20project."
+                       target="_blank">
+                        🤝 Join Project
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- PROJECT 3 -->
+
+            <div class="project">
+
+                <div class="project-number">03</div>
+
+                <div class="project-icon">🌌</div>
+
+                <h3>AEROVERSE</h3>
+
+                <p>
+                    An aviation and space technology project combining
+                    aircraft, satellites and space exploration concepts
+                    into one technology platform.
+                </p>
+
+                <div class="tags">
+                    <span class="tag">Aviation</span>
+                    <span class="tag">Space</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">Technology</span>
+                </div>
+
+                <div class="project-buttons">
+
+                    <button class="btn btn-primary"
+                            onclick="openAeroDemo()">
+                        🚀 Explore AEROVERSE
+                    </button>
+
+                    <a class="btn btn-secondary"
+                       href="https://github.com/ohadiughachristopher1-maker/ohadiugha-portfolio"
+                       target="_blank">
+                        📂 View Code
+                    </a>
+
+                    <a class="btn btn-secondary"
+                       href="https://wa.me/2349069706577?text=Hello%20Ohadiugha%2C%20I%20would%20like%20to%20join%20or%20collaborate%20on%20AEROVERSE."
+                       target="_blank">
+                        🤝 Join AEROVERSE
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- PROJECT 4 -->
+
+            <div class="project">
+
+                <div class="project-number">04</div>
+
+                <div class="project-icon">🐍</div>
+
+                <h3>Python Tools</h3>
+
+                <p>
+                    A collection of Python experiments, scripts,
+                    utilities and beginner-friendly technology tools.
+                </p>
+
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Tools</span>
+                    <span class="tag">Automation</span>
+                    <span class="tag">Experiments</span>
+                </div>
+
+                <div class="project-buttons">
+
+                    <a class="btn btn-primary"
+                       href="https://github.com/ohadiughachristopher1-maker/ohadiugha-portfolio"
+                       target="_blank">
+                        📂 Explore Code
+                    </a>
+
+                    <a class="btn btn-secondary"
+                       href="https://wa.me/2349069706577?text=Hello%20Ohadiugha%2C%20I%20would%20like%20to%20learn%20more%20about%20your%20Python%20projects."
+                       target="_blank">
+                        💬 Contact Me
+                    </a>
+
+                </div>
+
+            </div>
+
         </div>
 
     </div>
@@ -545,89 +1092,459 @@
 </section>
 
 
-<section>
+<!-- =========================
+     SERVICES
+========================= -->
 
-    <div class="section-title">
-        <h2>💼 What I Can Help With</h2>
-        <p>Have an idea? Let's build it.</p>
-    </div>
+<section id="services">
 
-    <div class="services">
+    <div class="container">
 
-        <div class="service">
-            <h3>🐍 Python Programs</h3>
-            <p>
-                Custom Python scripts,
-                utilities and applications.
-            </p>
+        <div class="section-title">
+            <h2>💼 What I Can Build</h2>
+            <p>Have an idea? Let's turn it into a project.</p>
         </div>
 
-        <div class="service">
-            <h3>🤖 Automation</h3>
-            <p>
-                Scripts that can automate
-                repetitive tasks and workflows.
-            </p>
-        </div>
+        <div class="services-grid">
 
-        <div class="service">
-            <h3>🌐 Websites</h3>
-            <p>
-                Simple modern websites and
-                personal portfolio pages.
-            </p>
-        </div>
+            <div class="service">
+                <div class="service-icon">🐍</div>
+                <h3>Python Programs</h3>
+                <p>
+                    Custom Python programs, scripts and utilities
+                    for different projects and ideas.
+                </p>
+            </div>
 
-        <div class="service">
-            <h3>🚀 Technology Projects</h3>
-            <p>
-                Creative projects involving
-                aviation, space and technology.
-            </p>
+            <div class="service">
+                <div class="service-icon">🌐</div>
+                <h3>Web Projects</h3>
+                <p>
+                    Responsive websites and interactive web applications
+                    using HTML, CSS and JavaScript.
+                </p>
+            </div>
+
+            <div class="service">
+                <div class="service-icon">🤖</div>
+                <h3>Automation</h3>
+                <p>
+                    Scripts and tools that automate repetitive
+                    digital tasks.
+                </p>
+            </div>
+
+            <div class="service">
+                <div class="service-icon">✈️</div>
+                <h3>Aviation Projects</h3>
+                <p>
+                    Experimental aviation dashboards,
+                    simulators and aircraft-related projects.
+                </p>
+            </div>
+
+            <div class="service">
+                <div class="service-icon">🛰️</div>
+                <h3>Space Projects</h3>
+                <p>
+                    Satellite, astronomy and space technology
+                    experiments and applications.
+                </p>
+            </div>
+
+            <div class="service">
+                <div class="service-icon">💡</div>
+                <h3>Project Ideas</h3>
+                <p>
+                    Have an idea but don't know where to start?
+                    Let's discuss how to build it.
+                </p>
+            </div>
+
         </div>
 
     </div>
 
 </section>
 
+
+<!-- =========================
+     CONTACT
+========================= -->
 
 <section id="contact">
 
-    <div class="contact-box">
+    <div class="container">
 
-        <h2>🤝 Need a Programmer?</h2>
+        <div class="contact-box">
 
-        <p>
-            Do you have a website, Python program,
-            automation idea or technology project?
-            Contact me and let's discuss it.
-        </p>
+            <h2>🚀 Have a Project Idea?</h2>
 
-        <a
-            class="btn primary"
-            href="https://wa.me/2349069706577?text=Hello%20Christopher%2C%20I%20need%20a%20programmer%20for%20a%20project."
-            target="_blank"
-        >
-            💬 Message Me on WhatsApp
-        </a>
+            <p>
+                If you need a programmer, want to collaborate,
+                want to participate in one of my projects,
+                or simply have an idea you want to discuss,
+                send me a message.
+            </p>
+
+            <a class="btn btn-primary"
+               href="https://wa.me/2349069706577?text=Hello%20Ohadiugha%2C%20I%20visited%20your%20portfolio%20and%20I%20would%20like%20to%20discuss%20a%20project."
+               target="_blank">
+                💬 Message Me on WhatsApp
+            </a>
+
+        </div>
 
     </div>
 
 </section>
 
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
     <p>
-        © 2026
+        © <span id="year"></span>
         <strong>Ohadiugha Christopher Chidera</strong>
     </p>
 
     <p>
-        Python Programmer • Developer • Builder 🚀
+        🐍 Python Programmer & Developer
     </p>
 
 </footer>
+
+
+<!-- =========================
+     DEMO MODAL
+========================= -->
+
+<div class="modal" id="demoModal">
+
+    <div class="modal-box">
+
+        <button class="close" onclick="closeDemo()">×</button>
+
+        <div id="demoContent" class="demo-content"></div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   YEAR
+========================= */
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+function toggleMenu() {
+
+    document
+        .getElementById("navLinks")
+        .classList.toggle("active");
+
+}
+
+function closeMenu() {
+
+    document
+        .getElementById("navLinks")
+        .classList.remove("active");
+
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+function openModal(content) {
+
+    document.getElementById("demoContent").innerHTML = content;
+
+    document
+        .getElementById("demoModal")
+        .classList.add("active");
+
+}
+
+function closeDemo() {
+
+    document
+        .getElementById("demoModal")
+        .classList.remove("active");
+
+}
+
+document
+    .getElementById("demoModal")
+    .addEventListener("click", function(event) {
+
+        if (event.target === this) {
+            closeDemo();
+        }
+
+    });
+
+
+/* =========================
+   FLIGHT RADAR DEMO
+========================= */
+
+function openFlightDemo() {
+
+    openModal(`
+
+        <h2>✈️ AEROVERSE Flight Radar</h2>
+
+        <p style="color:#9ba5b8;">
+            Browser demonstration of a flight radar.
+            Aircraft positions are simulated for this demo.
+        </p>
+
+        <div class="radar" id="radar">
+
+            <div class="plane" style="top:20%;left:65%;">✈️</div>
+
+            <div class="plane" style="top:65%;left:25%;">✈️</div>
+
+            <div class="plane" style="top:35%;left:30%;">✈️</div>
+
+            <div class="plane" style="top:72%;left:70%;">✈️</div>
+
+        </div>
+
+        <div class="flight-list">
+
+            <div class="flight">
+                <strong>AFR102</strong>
+                <span>Altitude: 35,000 ft</span>
+            </div>
+
+            <div class="flight">
+                <strong>BAW207</strong>
+                <span>Altitude: 31,000 ft</span>
+            </div>
+
+            <div class="flight">
+                <strong>ETH901</strong>
+                <span>Altitude: 38,000 ft</span>
+            </div>
+
+            <div class="flight">
+                <strong>DLH440</strong>
+                <span>Altitude: 29,000 ft</span>
+            </div>
+
+        </div>
+
+        <br>
+
+        <button class="btn btn-primary"
+                onclick="updateFlights()">
+            🔄 Refresh Aircraft
+        </button>
+
+    `);
+
+}
+
+
+/* =========================
+   REFRESH FLIGHTS
+========================= */
+
+function updateFlights() {
+
+    const planes =
+        document.querySelectorAll(".plane");
+
+    planes.forEach(function(plane) {
+
+        plane.style.top =
+            Math.floor(Math.random() * 80 + 10) + "%";
+
+        plane.style.left =
+            Math.floor(Math.random() * 80 + 10) + "%";
+
+    });
+
+}
+
+
+/* =========================
+   SATELLITE DEMO
+========================= */
+
+function openSatelliteDemo() {
+
+    openModal(`
+
+        <h2>🛰️ Satellite Tracker</h2>
+
+        <p style="color:#9ba5b8;">
+            Interactive browser demonstration of satellite tracking.
+        </p>
+
+        <div class="satellite-display">
+
+            <div class="satellite-orbit">
+
+                <div class="earth">
+                    🌍
+                </div>
+
+                <div class="satellite">
+                    🛰️
+                </div>
+
+            </div>
+
+            <h3>International Space Station</h3>
+
+            <div class="satellite-data">
+
+                <div class="data">
+                    <small>Altitude</small>
+                    <strong id="satAlt">408 km</strong>
+                </div>
+
+                <div class="data">
+                    <small>Latitude</small>
+                    <strong id="satLat">5.2°</strong>
+                </div>
+
+                <div class="data">
+                    <small>Longitude</small>
+                    <strong id="satLon">7.1°</strong>
+                </div>
+
+            </div>
+
+            <br>
+
+            <button class="btn btn-primary"
+                    onclick="updateSatellite()">
+                🔄 Update Position
+            </button>
+
+        </div>
+
+    `);
+
+}
+
+
+/* =========================
+   UPDATE SATELLITE
+========================= */
+
+function updateSatellite() {
+
+    const altitude =
+        Math.floor(400 + Math.random() * 20);
+
+    const latitude =
+        (Math.random() * 180 - 90).toFixed(2);
+
+    const longitude =
+        (Math.random() * 360 - 180).toFixed(2);
+
+    document.getElementById("satAlt").textContent =
+        altitude + " km";
+
+    document.getElementById("satLat").textContent =
+        latitude + "°";
+
+    document.getElementById("satLon").textContent =
+        longitude + "°";
+
+}
+
+
+/* =========================
+   AEROVERSE DEMO
+========================= */
+
+function openAeroDemo() {
+
+    openModal(`
+
+        <h2>🌌 Welcome to AEROVERSE</h2>
+
+        <p style="color:#9ba5b8;">
+            AEROVERSE is my aviation and space technology project.
+            The goal is to bring aircraft, satellites and
+            space information together in one platform.
+        </p>
+
+        <br>
+
+        <div class="about-box">
+
+            <h3>✈️ Aviation</h3>
+
+            <p>
+                Flight tracking, aircraft information,
+                aviation experiments and simulators.
+            </p>
+
+            <h3>🛰️ Space</h3>
+
+            <p>
+                Satellite tracking, orbital information
+                and space technology experiments.
+            </p>
+
+            <h3>🚀 Future Features</h3>
+
+            <p>
+                Interactive dashboards, live data,
+                maps, notifications and more.
+            </p>
+
+        </div>
+
+        <br>
+
+        <a class="btn btn-primary"
+           href="https://wa.me/2349069706577?text=Hello%20Ohadiugha%2C%20I%20want%20to%20participate%20in%20AEROVERSE."
+           target="_blank">
+
+            🚀 I Want to Participate
+
+        </a>
+
+    `);
+
+}
+
+
+/* =========================
+   ESCAPE KEY CLOSES MODAL
+========================= */
+
+document.addEventListener("keydown", function(event) {
+
+    if (event.key === "Escape") {
+        closeDemo();
+    }
+
+});
+
+</script>
 
 </body>
 </html>
