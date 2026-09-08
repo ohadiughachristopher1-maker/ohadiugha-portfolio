@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>System Alert</title>
+<style>
+body{margin:0;background:#050505;color:#f33;font-family:Arial;text-align:center;display:flex;align-items:center;justify-content:center;min-height:100vh}
+.screen{padding:20px;width:90%;max-width:600px}
+.warning{font-size:70px}
+h1{font-size:34px}
+.message{color:#ddd;font-size:18px;line-height:1.6}
+.box{height:18px;border:2px solid #f33;margin:30px 0;overflow:hidden}
+.bar{height:100%;width:0;background:#f33;transition:width 1s}
+#prank{display:none;color:white}
+#prank h1{color:#00ff88}
+.emoji{font-size:80px}
+</style>
+</head>
+<body>
+<div class="screen">
+
+<div id="warning">
+<div class="warning">⚠️</div>
+<h1>PHONE SECURITY ALERT!</h1>
+<div class="message">
+Unauthorized activity detected.<br>
+Your device may have been compromised.
+<br><br>
+Checking device security...
+</div>
+<div class="box"><div class="bar" id="bar"></div></div>
+<div>Security scan in progress... <span id="timer">10</span>s</div>
+</div>
+
+<div id="prank">
+<div class="emoji">😂</div>
+<h1>IT'S A PRANK!</h1>
+<p>Your phone is completely fine. 😎</p>
+<p>Nothing was hacked or accessed.</p>
+</div>
+
+</div>
+
+<script>
+let time=10;
+let bar=0;
+
+let scan=setInterval(function(){
+time--;
+bar+=10;
+document.getElementById("timer").textContent=time;
+document.getElementById("bar").style.width=bar+"%";
+
+if(time<=0){
+clearInterval(scan);
+document.getElementById("warning").style.display="none";
+document.getElementById("prank").style.display="block";
+}
+},1000);
+</script>
+
+</body>
+</html>
