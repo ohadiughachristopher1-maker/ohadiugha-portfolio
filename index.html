@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ohadiugha Christopher Chidera | Python Programmer</title>
+
+    <meta name="description"
+          content="Ohadiugha Christopher Chidera — Python programmer and developer. Available for programming projects and collaborations.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #050816;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 7%;
+            background: rgba(5, 8, 22, 0.88);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #4ade80;
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        nav a {
+            color: #ddd;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #4ade80;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 70px;
+            background:
+                radial-gradient(circle at 50% 20%, rgba(74,222,128,0.15), transparent 35%),
+                #050816;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(74,222,128,0.35);
+            border-radius: 50px;
+            color: #4ade80;
+            background: rgba(74,222,128,0.08);
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 9vw, 80px);
+            line-height: 1.05;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #4ade80;
+        }
+
+        .hero h2 {
+            font-size: clamp(20px, 4vw, 30px);
+            color: #cbd5e1;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+            color: #94a3b8;
+            font-size: 17px;
+        }
+
+        .buttons {
+            margin-top: 35px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 22px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .primary {
+            background: #4ade80;
+            color: #03120a;
+        }
+
+        .primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(74,222,128,0.2);
+        }
+
+        .secondary {
+            border: 1px solid #334155;
+            color: white;
+        }
+
+        .secondary:hover {
+            border-color: #4ade80;
+            color: #4ade80;
+        }
+
+        section {
+            padding: 90px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #94a3b8;
+        }
+
+        .about {
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .about p {
+            color: #cbd5e1;
+            font-size: 17px;
+            margin-bottom: 18px;
+        }
+
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .skill {
+            padding: 25px;
+            background: #0b1224;
+            border: 1px solid #1e293b;
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+
+        .skill:hover {
+            transform: translateY(-5px);
+            border-color: #4ade80;
+        }
+
+        .skill-icon {
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .skill h3 {
+            margin-bottom: 8px;
+        }
+
+        .skill p {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 22px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .project {
+            padding: 25px;
+            background: linear-gradient(145deg, #0b1224, #07101e);
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            transition: 0.3s;
+        }
+
+        .project:hover {
+            transform: translateY(-6px);
+            border-color: #4ade80;
+        }
+
+        .project-icon {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .project h3 {
+            margin-bottom: 10px;
+        }
+
+        .project p {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .service {
+            padding: 25px;
+            border-radius: 15px;
+            background: #0b1224;
+            border: 1px solid #1e293b;
+        }
+
+        .service h3 {
+            color: #4ade80;
+            margin-bottom: 10px;
+        }
+
+        .service p {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .contact-box {
+            max-width: 750px;
+            margin: auto;
+            text-align: center;
+            padding: 45px 25px;
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(74,222,128,0.12),
+                    transparent 65%
+                );
+            border: 1px solid #1e293b;
+            border-radius: 20px;
+        }
+
+        .contact-box h2 {
+            font-size: 34px;
+            margin-bottom: 15px;
+        }
+
+        .contact-box p {
+            color: #94a3b8;
+            margin-bottom: 25px;
+        }
+
+        footer {
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 1px solid #1e293b;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        footer strong {
+            color: #4ade80;
+        }
+
+        @media (max-width: 700px) {
+            nav {
+                padding: 15px 5%;
+            }
+
+            nav .links {
+                display: none;
+            }
+
+            section {
+                padding: 70px 5%;
+            }
+
+            .hero {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .section-title h2 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">
+        &lt;Ohadiugha<span>/&gt;</span>
+    </div>
+
+    <div class="links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
+
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            🟢 Available for Programming Projects
+        </div>
+
+        <h1>
+            Ohadiugha Christopher
+            <span>Chidera</span>
+        </h1>
+
+        <h2>
+            🐍 Python Programmer & Developer
+        </h2>
+
+        <p>
+            Welcome to my programming profile.
+            I build Python programs, useful tools,
+            automation projects and technology solutions.
+            If you need a programmer for your next idea,
+            let's work together.
+        </p>
+
+        <div class="buttons">
+
+            <a
+                class="btn primary"
+                href="https://wa.me/2349069706577?text=Hello%20Christopher%2C%20I%20found%20your%20programming%20profile%20and%20I%20would%20like%20to%20discuss%20a%20project."
+                target="_blank"
+            >
+                💬 Contact Me on WhatsApp
+            </a>
+
+            <a
+                class="btn secondary"
+                href="#projects"
+            >
+                🚀 View My Projects
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="about">
+
+    <div class="section-title">
+        <h2>👨‍💻 About Me</h2>
+        <p>Programmer • Learner • Builder</p>
+    </div>
+
+    <div class="about">
+
+        <p>
+            My name is
+            <strong>Ohadiugha Christopher Chidera</strong>.
+            I am a Python programmer who enjoys learning
+            technology and turning ideas into working programs.
+        </p>
+
+        <p>
+            I am interested in software development,
+            automation, space technology, aviation,
+            useful tools and creative programming projects.
+        </p>
+
+        <p>
+            If you have an idea that needs a programmer,
+            feel free to contact me.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section id="skills">
+
+    <div class="section-title">
+        <h2>🛠️ My Skills</h2>
+        <p>Things I am learning and building with</p>
+    </div>
+
+    <div class="skills">
+
+        <div class="skill">
+            <div class="skill-icon">🐍</div>
+            <h3>Python</h3>
+            <p>
+                Building programs, tools,
+                automation and applications with Python.
+            </p>
+        </div>
+
+        <div class="skill">
+            <div class="skill-icon">🌐</div>
+            <h3>Web Development</h3>
+            <p>
+                Creating responsive websites
+                using HTML, CSS and JavaScript.
+            </p>
+        </div>
+
+        <div class="skill">
+            <div class="skill-icon">🤖</div>
+            <h3>Automation</h3>
+            <p>
+                Creating scripts that automate
+                repetitive tasks and workflows.
+            </p>
+        </div>
+
+        <div class="skill">
+            <div class="skill-icon">🚀</div>
+            <h3>Technology Projects</h3>
+            <p>
+                Building creative projects around
+                aviation, space and technology.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="projects">
+
+    <div class="section-title">
+        <h2>🚀 My Projects</h2>
+        <p>Projects I am building and exploring</p>
+    </div>
+
+    <div class="projects">
+
+        <div class="project">
+            <div class="project-icon">✈️</div>
+            <h3>Flight Radar Simulator</h3>
+            <p>
+                A Python aviation project that
+                simulates aircraft tracking,
+                flight numbers, altitude, speed
+                and destinations.
+            </p>
+        </div>
+
+        <div class="project">
+            <div class="project-icon">🛰️</div>
+            <h3>Satellite Tracker</h3>
+            <p>
+                A Python project designed to
+                retrieve satellite position data
+                and display tracking information.
+            </p>
+        </div>
+
+        <div class="project">
+            <div class="project-icon">🚀</div>
+            <h3>AEROVERSE</h3>
+            <p>
+                My bigger space and aviation project
+                combining satellites, aircraft,
+                missions and space technology.
+            </p>
+        </div>
+
+        <div class="project">
+            <div class="project-icon">🤖</div>
+            <h3>Python Tools</h3>
+            <p>
+                Small Python programs created
+                to solve useful problems and
+                experiment with programming.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section>
+
+    <div class="section-title">
+        <h2>💼 What I Can Help With</h2>
+        <p>Have an idea? Let's build it.</p>
+    </div>
+
+    <div class="services">
+
+        <div class="service">
+            <h3>🐍 Python Programs</h3>
+            <p>
+                Custom Python scripts,
+                utilities and applications.
+            </p>
+        </div>
+
+        <div class="service">
+            <h3>🤖 Automation</h3>
+            <p>
+                Scripts that can automate
+                repetitive tasks and workflows.
+            </p>
+        </div>
+
+        <div class="service">
+            <h3>🌐 Websites</h3>
+            <p>
+                Simple modern websites and
+                personal portfolio pages.
+            </p>
+        </div>
+
+        <div class="service">
+            <h3>🚀 Technology Projects</h3>
+            <p>
+                Creative projects involving
+                aviation, space and technology.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="contact">
+
+    <div class="contact-box">
+
+        <h2>🤝 Need a Programmer?</h2>
+
+        <p>
+            Do you have a website, Python program,
+            automation idea or technology project?
+            Contact me and let's discuss it.
+        </p>
+
+        <a
+            class="btn primary"
+            href="https://wa.me/2349069706577?text=Hello%20Christopher%2C%20I%20need%20a%20programmer%20for%20a%20project."
+            target="_blank"
+        >
+            💬 Message Me on WhatsApp
+        </a>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <p>
+        © 2026
+        <strong>Ohadiugha Christopher Chidera</strong>
+    </p>
+
+    <p>
+        Python Programmer • Developer • Builder 🚀
+    </p>
+
+</footer>
+
+</body>
+</html>
