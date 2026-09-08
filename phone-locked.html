@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>PHONE LOCKED</title>
+<style>
+*{box-sizing:border-box}
+html,body{
+ margin:0;width:100%;height:100%;overflow:hidden;
+ background:#000;color:#ff2020;font-family:monospace;
+}
+body{display:flex;align-items:center;justify-content:center}
+#bg{
+ position:fixed;inset:0;
+ background:
+ repeating-linear-gradient(0deg,transparent 0,transparent 3px,#ff00000d 4px),
+ radial-gradient(circle,#240000,#000 65%);
+ animation:pulse 1s infinite alternate;
+}
+@keyframes pulse{to{filter:brightness(1.35)}}
+
+#flash{
+ position:fixed;inset:0;background:red;opacity:0;
+ pointer-events:none;z-index:20;
+}
+.flash{animation:flash .15s}
+@keyframes flash{
+ 0%{opacity:.8}100%{opacity:0}
+}
+
+#emergency{
+ position:fixed;top:7px;right:7px;z-index:100;
+ color:#777;background:#080808;border:1px solid #333;
+ padding:5px 8px;font:11px monospace;
+ opacity:.35;
+}
+#emergency:active{opacity:1}
+
+.panel{
+ position:relative;z-index:5;
+ width:min(94%,520px);
+ border:2px solid #f00;
+ background:#050000ee;
+ box-shadow:0 0 35px #f000;
+ padding:22px;
+ text-align:center;
+}
+
+.lock{font-size:70px;animation:shake .12s infinite}
+@keyframes shake{
+ 0%{transform:translate(0)}
+ 50%{transform:translate(3px,-2px)}
+ 100%{transform:translate(-3px,2px)}
+}
+
+h1{
+ font-size:clamp(30px,9vw,55px);
+ margin:5px 0;
+ text-shadow:0 0 15px red,0 0 35px red;
+}
+.warning{
+ font-size:16px;
+ font-weight:bold;
+ animation:blink .5s infinite;
+}
+@keyframes blink{50%{opacity:.15}}
+
+#terminal{
+ margin:18px 0;
+ height:175px;
+ overflow:hidden;
+ text-align:left;
+ padding:12px;
+ border:1px solid #600;
+ background:#010000;
+ color:#ff3838;
+ font-size:12px;
+}
+.line{margin:5px 0}
+
+#timer{
+ font-size:65px;
+ font-weight:bold;
+ text-shadow:0 0 25px red;
+}
+input{
+ width:220px;
+ max-width:90%;
+ padding:14px;
+ background:#100000;
+ border:2px solid red;
+ color:white;
+ text-align:center;
+ font:22px monospace;
+ outline:none;
+}
+button{
+ margin-top:12px;
+ padding:13px 24px;
+ background:#260000;
+ color:#fff;
+ border:1px solid red;
+ font:bold 16px monospace;
+}
+button:active{transform:scale(.96)}
+
+#locked,#prank{display:none}
+#prank{
+ position:fixed;inset:0;z-index:50;
+ background:#000;
+ align-items:center;justify-content:center;
+ flex-direction:column;text-align:center;
+ padding:20px;
+}
+#prank h2{
+ font-size:clamp(38px,10vw,75px);
+ color:#fff;
+ text-shadow:0 0 20px red;
+}
+#prank p{font-size:20px;color:#ff3333}
+.green{color:#00ff66}
+</style>
+</head>
+
+<body>
+
+<div id="bg"></div>
+<div id="flash"></div>
+
+<button id="emergency" onclick="emergencyExit()">EXIT</button>
+
+<div class="panel" id="start">
+ <div class="lock">🔒</div>
+ <h1>PHONE LOCK</h1>
+ <p class="warning">⚠ SECURITY SYSTEM ACTIVATION ⚠</p>
+ <p>This device is entering simulated lockdown.</p>
+ <button onclick="startLock()">ACTIVATE</button>
+</div>
+
+<div class="panel" id="locked">
+
+ <div class="lock">🔒</div>
+ <h1>PHONE LOCKED</h1>
+
+ <div class="warning">
+ ⚠ UNAUTHORIZED ACTIVITY DETECTED ⚠
+ </div>
+
+ <div id="terminal"></div>
+
+ <div id="timer">30</div>
+
+ <p>ENTER SECURITY CODE TO EXIT</p>
+
+ <input id="code"
+ maxlength="9"
+ inputmode="numeric"
+ placeholder="•••••••••">
+
+ <br>
+
+ <button onclick="unlock()">UNLOCK</button>
+
+ <p style="font-size:11px;color:#777">
+ Simulation only — no real device access.
+ </p>
+
+</div>
+
+<div id="prank">
+ <div style="font-size:75px">😂</div>
+ <h2>YOU GOT PRANKED!</h2>
+ <p class="green">YOUR PHONE WAS NEVER LOCKED.</p>
+ <p>Nothing was accessed or changed.</p>
+ <button onclick="location.reload()">PLAY AGAIN</button>
+</div>
+
+<script>
+const flash=document.getElementById("flash");
+const terminal=document.getElementById("terminal");
+const timerBox=document.getElementById("timer");
+const start=document.getElementById("start");
+const locked=document.getElementById("locked");
+const prank=document.getElementById("prank");
+const code=document.getElementById("code");
+
+let audio;
+let countdown;
+
+function beep(freq=300,duration=.08){
+ try{
+  if(!audio) audio=new AudioContext();
+  let o=audio.createOscillator();
+  let g=audio.createGain();
+  o.type="square";
+  o.frequency.value=freq;
+  g.gain.value=.025;
+  o.connect(g);
+  g.connect(audio.destination);
+  o.start();
+  o.stop(audio.currentTime+duration);
+ }catch(e){}
+}
+
+function addLine(text){
+ let d=document.createElement("div");
+ d.className="line";
+ d.textContent=text;
+ terminal.appendChild(d);
+ terminal.scrollTop=terminal.scrollHeight;
+}
+
+function doFlash(){
+ flash.classList.remove("flash");
+ void flash.offsetWidth;
+ flash.classList.add("flash");
+}
+
+function startLock(){
+
+ try{
+  audio=new AudioContext();
+  audio.resume();
+ }catch(e){}
+
+ start.style.display="none";
+ locked.style.display="block";
+
+ const logs=[
+ "> INITIALIZING LOCKDOWN...",
+ "> VERIFYING DEVICE...",
+ "> SECURITY MODULE ACTIVE",
+ "> SCANNING SYSTEM...",
+ "> UNKNOWN ACTIVITY DETECTED",
+ "> ACCESS RESTRICTIONS ENABLED",
+ "> ENCRYPTED SESSION STARTED",
+ "> SECURITY CODE REQUIRED",
+ "> WARNING: SIMULATION MODE ACTIVE"
+ ];
+
+ let i=0;
+
+ let logTimer=setInterval(()=>{
+  addLine(logs[i]);
+  beep(180+i*25,.07);
+
+  if(i===3 || i===5 || i===7) doFlash();
+
+  i++;
+
+  if(i>=logs.length) clearInterval(logTimer);
+ },550);
+
+ let seconds=30;
+
+ countdown=setInterval(()=>{
+  seconds--;
+  timerBox.textContent=seconds;
+  beep(seconds<=5?650:260,.06);
+
+  if(seconds<=10) timerBox.style.color="#fff";
+
+  if(seconds<=5) doFlash();
+
+  if(seconds<=0){
+   clearInterval(countdown);
+   addLine("> TIME EXPIRED");
+   setTimeout(showPrank,800);
+  }
+ },1000);
+}
+
+function unlock(){
+
+ if(code.value==="123456789"){
+  clearInterval(countdown);
+  addLine("> SECURITY CODE ACCEPTED");
+  beep(900,.25);
+
+  setTimeout(showPrank,700);
+
+ }else{
+  addLine("> INVALID SECURITY CODE");
+  code.value="";
+  code.focus();
+  beep(80,.2);
+  doFlash();
+ }
+}
+
+function showPrank(){
+ locked.style.display="none";
+ prank.style.display="flex";
+}
+
+function emergencyExit(){
+ clearInterval(countdown);
+ document.body.innerHTML=
+ '<div style="background:#000;color:#0f5;text-align:center;font-family:monospace;width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:25px">'+
+ '<h1>SAFE EXIT</h1>'+
+ '<p>This was only a harmless simulation.</p>'+
+ '<button onclick="location.reload()" style="padding:14px;background:#001a00;color:#0f5;border:1px solid #0f5">RETURN</button>'+
+ '</div>';
+}
+
+code.addEventListener("keydown",e=>{
+ if(e.key==="Enter") unlock();
+});
+</script>
+
+</body>
+</html>
