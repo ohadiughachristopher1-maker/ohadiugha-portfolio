@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>🧠 Mind Reader</title>
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;min-height:100vh;background:#05000d;color:white;
+font-family:Arial,sans-serif;display:flex;align-items:center;
+justify-content:center;overflow:hidden;
+}
+body:before{
+content:"";position:fixed;inset:0;
+background:
+radial-gradient(circle at 20% 20%,#42108055,transparent 30%),
+radial-gradient(circle at 80% 80%,#0066ff44,transparent 30%);
+pointer-events:none;
+}
+.card{
+width:min(92%,500px);padding:30px 22px;text-align:center;
+background:#0d0818dd;border:1px solid #8c3cff;
+border-radius:25px;box-shadow:0 0 40px #711cff66;
+position:relative;z-index:1;
+}
+.brain{font-size:75px;animation:pulse 1.5s infinite}
+@keyframes pulse{
+50%{transform:scale(1.12);filter:drop-shadow(0 0 20px #b65cff)}
+}
+h1{font-size:36px;margin:5px 0 10px}
+.sub{color:#bbb;margin-bottom:25px}
+.step{font-size:20px;line-height:1.5;min-height:110px}
+button{
+border:0;border-radius:14px;padding:15px 24px;
+font-size:18px;font-weight:bold;background:#8d38ff;
+color:white;box-shadow:0 0 20px #8d38ff88;
+margin:7px;cursor:pointer;
+}
+button:active{transform:scale(.95)}
+input{
+width:80px;padding:15px;text-align:center;font-size:24px;
+border-radius:12px;border:2px solid #8d38ff;
+background:#160d24;color:white;
+}
+#result{display:none}
+.big{font-size:55px;margin:15px}
+.magic{
+font-size:22px;color:#d29cff;
+animation:appear .7s ease
+}
+@keyframes appear{
+from{opacity:0;transform:scale(.5)}
+to{opacity:1;transform:scale(1)}
+}
+.progress{
+height:5px;background:#21152f;border-radius:5px;
+margin:20px 0;overflow:hidden;
+}
+.bar{height:100%;width:0;background:#a64dff;transition:width .5s}
+.small{color:#777;font-size:12px;margin-top:20px}
+</style>
+</head>
+
+<body>
+<div class="card">
+
+<div class="brain">🧠</div>
+<h1>Mind Reader</h1>
+<div class="sub">I can predict the number you're thinking of...</div>
+
+<div id="game">
+
+<div class="progress"><div class="bar" id="bar"></div></div>
+
+<div class="step" id="step">
+Think of ANY whole number between <b>1 and 100</b>.<br><br>
+Don't tell me what it is. 🤫
+</div>
+
+<button id="next">I'm Ready 🧠</button>
+
+</div>
+
+<div id="result">
+<div class="big">🔮</div>
+<div class="magic">Analyzing your mind...</div>
+<div id="thinking"></div>
+</div>
+
+<div class="small">
+No personal information is collected. This is a mathematical magic trick.
+</div>
+
+</div>
+
+<script>
+const step=document.getElementById("step");
+const next=document.getElementById("next");
+const bar=document.getElementById("bar");
+const game=document.getElementById("game");
+const result=document.getElementById("result");
+const thinking=document.getElementById("thinking");
+
+let stage=0;
+
+next.onclick=function(){
+
+if(stage===0){
+stage=1;
+bar.style.width="25%";
+step.innerHTML=
+"Now <b>double</b> your number.<br><br>"+
+"Example: 7 → 14<br><br>"+
+"Keep the result in your head.";
+next.textContent="Done ✓";
+}
+
+else if(stage===1){
+stage=2;
+bar.style.width="50%";
+step.innerHTML=
+"Now <b>add 10</b> to your number.<br><br>"+
+"Don't tell me the answer. 🤫";
+next.textContent="Done ✓";
+}
+
+else if(stage===2){
+stage=3;
+bar.style.width="75%";
+step.innerHTML=
+"Now <b>divide your number by 2</b>.<br><br>"+
+"Almost there... 🧠";
+next.textContent="Continue 🔮";
+}
+
+else if(stage===3){
+stage=4;
+bar.style.width="100%";
+step.innerHTML=
+"Finally, <b>subtract the ORIGINAL number</b><br>"+
+"you first thought of.<br><br>"+
+"Keep the final answer in your mind.";
+next.textContent="READ MY MIND 😳";
+}
+
+else{
+game.style.display="none";
+result.style.display="block";
+
+let messages=[
+"Scanning thought patterns...",
+"Reading mathematical energy...",
+"Checking neural frequencies...",
+"Calibrating psychic sensors...",
+"Locking onto your answer..."
+];
+
+let i=0;
+
+let interval=setInterval(()=>{
+thinking.innerHTML=messages[i];
+i++;
+
+if(i>=messages.length){
+clearInterval(interval);
+
+setTimeout(()=>{
+thinking.innerHTML=
+"<div style='font-size:26px;margin-top:25px'>"+
+"Your answer is...</div>"+
+"<div style='font-size:80px;color:#d29cff;margin:15px'>5</div>"+
+"<div style='font-size:20px'>😳 I TOLD YOU I COULD READ YOUR MIND!</div>"+
+"<br><button onclick='location.reload()'>Try Again 🔄</button>";
+},700);
+}
+},700);
+}
+};
+</script>
+</body>
+</html>
