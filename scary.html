@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SECURITY ALERT</title>
+
+<style>
+*{box-sizing:border-box}
+html,body{
+margin:0;width:100%;height:100%;overflow:hidden;
+background:#000;color:#f00;font-family:monospace
+}
+body{
+display:flex;align-items:center;justify-content:center;
+position:relative
+}
+body:before{
+content:"";position:absolute;inset:0;
+background:repeating-linear-gradient(
+0deg,rgba(255,0,0,.03) 0px,
+rgba(255,0,0,.03) 1px,
+transparent 2px,
+transparent 4px
+);
+pointer-events:none
+}
+#screen{
+width:100%;height:100%;padding:20px;
+display:flex;flex-direction:column;
+align-items:center;justify-content:center;
+text-align:center
+}
+#start{
+position:absolute;z-index:20;
+background:#090909;border:2px solid red;
+color:red;padding:18px 28px;
+font-size:20px;font-family:monospace;
+box-shadow:0 0 25px red;
+}
+button{cursor:pointer}
+#main{display:none;width:100%;height:100%}
+.eye{
+width:150px;height:90px;
+border:5px solid red;
+border-radius:75% 15%;
+transform:rotate(45deg);
+position:relative;
+margin:10px auto 35px;
+box-shadow:0 0 20px red,0 0 60px red;
+animation:eyePulse .8s infinite alternate
+}
+.eye:after{
+content:"";
+position:absolute;
+width:38px;height:38px;
+background:red;border-radius:50%;
+top:21px;left:51px;
+box-shadow:0 0 20px red;
+animation:look 1.5s infinite alternate
+}
+@keyframes eyePulse{
+from{transform:rotate(45deg) scale(.9)}
+to{transform:rotate(45deg) scale(1.08)}
+}
+@keyframes look{
+from{left:35px}
+to{left:65px}
+}
+h1{
+font-size:clamp(30px,8vw,70px);
+margin:5px;
+text-shadow:0 0 10px red,0 0 30px red;
+animation:glitch .15s infinite
+}
+@keyframes glitch{
+0%{transform:translate(0)}
+25%{transform:translate(3px,-2px)}
+50%{transform:translate(-3px,2px)}
+75%{transform:translate(2px,1px)}
+100%{transform:translate(0)}
+}
+#terminal{
+width:min(900px,95%);
+height:230px;
+border:1px solid #600;
+padding:15px;
+text-align:left;
+overflow:hidden;
+background:#020000;
+box-shadow:0 0 25px #300;
+font-size:14px;
+color:#f22
+}
+.line{margin:5px 0}
+.warning{
+font-size:22px;
+font-weight:bold;
+animation:blink .5s infinite
+}
+@keyframes blink{
+50%{opacity:0}
+}
+#count{
+font-size:70px;
+font-weight:bold;
+text-shadow:0 0 25px red;
+margin:10px
+}
+#flash{
+position:fixed;inset:0;
+background:red;
+opacity:0;
+pointer-events:none;
+z-index:10
+}
+.flash{animation:flash .12s}
+@keyframes flash{
+0%{opacity:.8}
+100%{opacity:0}
+}
+#final{
+display:none;
+position:fixed;inset:0;
+background:#000;
+z-index:30;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+}
+#final h2{
+font-size:clamp(35px,10vw,90px);
+color:white;
+text-shadow:0 0 20px red,0 0 50px red;
+animation:shake .08s infinite
+}
+@keyframes shake{
+0%{transform:translate(0)}
+25%{transform:translate(5px,0)}
+50%{transform:translate(-5px,2px)}
+75%{transform:translate(2px,-2px)}
+100%{transform:translate(0)}
+}
+#final p{
+color:red;font-size:22px
+}
+</style>
+</head>
+
+<body>
+
+<div id="flash"></div>
+
+<div id="screen">
+
+<button id="start">⚠ TAP TO ENTER ⚠</button>
+
+<div id="main">
+
+<div class="eye"></div>
+
+<h1>SECURITY BREACH</h1>
+
+<div class="warning">
+⚠ UNAUTHORIZED ACTIVITY DETECTED ⚠
+</div>
+
+<div id="count">15</div>
+
+<div id="terminal"></div>
+
+</div>
+</div>
+
+<div id="final">
+<h2>YOU GOT PRANKED 😈</h2>
+<p>Your phone was never hacked.</p>
+<p>😂 GOT YOU!</p>
+</div>
+
+<script>
+const start=document.getElementById("start");
+const main=document.getElementById("main");
+const terminal=document.getElementById("terminal");
+const count=document.getElementById("count");
+const flash=document.getElementById("flash");
+const final=document.getElementById("final");
+
+let audio;
+
+function beep(freq,duration){
+try{
+if(!audio) audio=new AudioContext();
+let o=audio.createOscillator();
+let g=audio.createGain();
+o.frequency.value=freq;
+o.type="sawtooth";
+g.gain.value=.035;
+o.connect(g);
+g.connect(audio.destination);
+o.start();
+o.stop(audio.currentTime+duration);
+}catch(e){}
+}
+
+function add(text){
+let d=document.createElement("div");
+d.className="line";
+d.textContent=text;
+terminal.appendChild(d);
+terminal.scrollTop=terminal.scrollHeight;
+}
+
+start.onclick=()=>{
+start.style.display="none";
+main.style.display="block";
+
+try{
+audio=new AudioContext();
+audio.resume();
+}catch(e){}
+
+let messages=[
+"> INITIALIZING SECURITY PROTOCOL...",
+"> CONNECTING TO SYSTEM...",
+"> WARNING: UNKNOWN PROCESS DETECTED",
+"> ANALYZING SYSTEM RESPONSE...",
+"> ENCRYPTED CONNECTION ESTABLISHED",
+"> SEARCHING FOR UNAUTHORIZED ACCESS...",
+"> CRITICAL ALERT...",
+"> SYSTEM INTEGRITY: 31%",
+"> UNKNOWN DEVICE ACTIVITY DETECTED",
+"> VISUAL SENSOR SCAN SIMULATION...",
+"> ANALYZING THREAT LEVEL...",
+"> THREAT LEVEL: EXTREME",
+"> SECURITY WALLS: FAILING",
+"> FINAL SECURITY LOCKDOWN..."
+];
+
+let i=0;
+
+let interval=setInterval(()=>{
+if(i<messages.length){
+add(messages[i]);
+beep(180+i*18,.08);
+
+if(i===2||i===7||i===11){
+flash.classList.remove("flash");
+void flash.offsetWidth;
+flash.classList.add("flash");
+}
+i++;
+}else clearInterval(interval);
+},650);
+
+let n=15;
+
+let timer=setInterval(()=>{
+n--;
+count.textContent=n;
+beep(n<=5?500:250,.07);
+
+if(n<=5){
+flash.classList.remove("flash");
+void flash.offsetWidth;
+flash.classList.add("flash");
+}
+
+if(n<=0){
+clearInterval(timer);
+setTimeout(()=>{
+main.style.display="none";
+final.style.display="flex";
+beep(700,.3);
+},500);
+}
+},1000);
+};
+</script>
+
+</body>
+</html>
